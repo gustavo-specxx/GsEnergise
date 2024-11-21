@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Insights com ChatGPT</title>
+</head>
+<body>
+<h1>Gerar Insights com ChatGPT</h1>
+<form action="#" th:action="@{/insights}" method="post">
+    <label for="mensagem">Mensagem:</label>
+    <input type="text" id="mensagem" name="mensagem" required>
+    <button type="submit">Gerar Insight</button>
+</form>
+
+<div th:if="${mensagem}">
+    <h3>Mensagem Enviada:</h3>
+    <p th:text="${mensagem}"></p>
+
+    <h3>Insight Gerado:</h3>
+    <p th:text="${insight}"></p>
+</div>
+</body>
+</html>

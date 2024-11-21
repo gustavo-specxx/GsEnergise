@@ -1,23 +1,25 @@
 package com.example.demo;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
+@Table(name = "consumo_energetico")
 public class ConsumoEnergetico {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_consumo") // Mapear para a coluna existente no banco
     private Long id;
 
-    @NotNull
+    @Column(nullable = false)
     private String endereco;
 
-    @NotNull
-    private Double consumo; // Consumo em kWh
+    @Column(nullable = false)
+    private Double consumo;
 
-    @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data_registro") // Mapear para a coluna no banco
     private Date dataRegistro;
 
     // Getters e Setters

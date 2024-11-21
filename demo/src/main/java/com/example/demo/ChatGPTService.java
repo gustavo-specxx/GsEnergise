@@ -15,39 +15,58 @@ import java.util.Map;
 @Service
 public class ChatGPTService {
 
+    private final RestTemplate restTemplate;
+
     @Value("${spring.ai.openai.api-key}")
     private String apiKey;
-
 
     @Value("${chatgpt.api.url}")
     private String apiUrl;
 
-    public String gerarInsight(String mensagem) {
-        RestTemplate restTemplate = new RestTemplate();
+    // Construtor para injetar o RestTemplate
+    public ChatGPTService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
+    /**
+     * Gera insights com base na mensagem enviada.
+     *
+     * @param mensagem Mensagem de entrada para o ChatGPT.
+     * @return Resposta gerada pelo ChatGPT ou mensagem de erro.
+     */
+    public String gerarInsight(String mensagem) {
         if (apiKey == null || apiKey.isEmpty()) {
             return "A chave da API do OpenAI não está configurada.";
         }
 
-        System.out.println("API Key usada: " + apiKey); // Adicione isso para verificar se a chave de API está sendo carregada
+        System.out.println("API Key usada: " + apiKey);
+        System.out.println("URL da API: " + apiUrl);
 
+        // Configurando os headers
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
         headers.set("Authorization", "Bearer " + apiKey);
 
+        // Configurando o corpo da requisição
         Map<String, Object> requestBody = new HashMap<>();
-        requestBody.put("model", "gpt-3.5-turbo");
-        requestBody.put("messages", new Object[]{
-                new HashMap<String, String>() {{
-                    put("role", "user");
-                    put("content", mensagem);
-                }}
-        });
+        requestBody.put("model", "gpt-3.5-turbo"); // ou "gpt-4"
+        requestBody.put("messages", List.of(
+                Map.of(
+                        "role", "user",
+                        "content", mensagem
+                )
+        ));
 
+        System.out.println("Corpo da requisição: " + requestBody);
+
+        // Enviando a requisição
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(requestBody, headers);
 
         try {
             ResponseEntity<Map> response = restTemplate.exchange(apiUrl, HttpMethod.POST, entity, Map.class);
+            System.out.println("Resposta recebida: " + response.getBody());
+
+            // Processando a resposta
             Map<String, Object> responseBody = response.getBody();
 
             if (responseBody != null && responseBody.containsKey("choices")) {

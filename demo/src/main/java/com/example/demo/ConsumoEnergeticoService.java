@@ -1,28 +1,28 @@
 package com.example.demo;
 
-import com.example.demo.ConsumoEnergetico;
-import com.example.demo.ConsumoEnergeticoRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
 public class ConsumoEnergeticoService {
-    private final ConsumoEnergeticoRepository repository;
 
-    public ConsumoEnergeticoService(ConsumoEnergeticoRepository repository) {
-        this.repository = repository;
+    private final ConsumoEnergeticoRepository consumoRepository;
+
+    public ConsumoEnergeticoService(ConsumoEnergeticoRepository consumoRepository) {
+        this.consumoRepository = consumoRepository;
     }
 
     public List<ConsumoEnergetico> listarTodos() {
-        return repository.findAll();
+        return consumoRepository.findAll();
     }
 
-    public List<ConsumoEnergetico> listarPorEndereco(String endereco) {
-        return repository.findAllByEndereco(endereco);
-    }
+    public void salvar(ConsumoEnergeticoDTO consumoDTO) {
+        // Convertendo DTO para entidade antes de salvar
+        ConsumoEnergetico consumo = new ConsumoEnergetico();
+        consumo.setEndereco(consumoDTO.getEndereco());
+        consumo.setConsumo(consumoDTO.getConsumo());
+        consumo.setDataRegistro(consumoDTO.getDataRegistro());
 
-    public ConsumoEnergetico salvar(ConsumoEnergetico consumoEnergetico) {
-        return repository.save(consumoEnergetico);
+        consumoRepository.save(consumo); // Salva a entidade no banco
     }
 }

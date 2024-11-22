@@ -30,15 +30,16 @@
   <form method="post" th:action="@{/insights}">
     <div class="mb-3">
       <label for="inputTexto" class="form-label">Texto para análise</label>
-      <textarea id="inputTexto" name="texto" class="form-control" rows="5"></textarea>
+      <textarea id="inputTexto" name="mensagem" class="form-control" rows="5"></textarea>
     </div>
     <button type="submit" class="btn btn-primary">Enviar</button>
   </form>
   <div class="mt-4">
     <h3>Resposta do ChatGPT:</h3>
-    <p th:text="${resposta}">Resposta será exibida aqui...</p>
+    <p th:text="${insight}">Resposta será exibida aqui...</p>
   </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

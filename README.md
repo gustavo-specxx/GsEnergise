@@ -26,20 +26,16 @@ Gerenciar usuários com autenticação e validação.
 Analisar o consumo energético dos produtos cadastrados.
 Fornecer insights para economia de energia, utilizando sugestões geradas pelo ChatGPT.
 Funcionalidades
-Cadastro de Produtos:
-
+Cadastro de Produtos
 Nome do produto.
 Consumo energético (em kWh).
-Gerenciamento de Usuários:
-
+Gerenciamento de Usuários
 Cadastro de novos usuários.
 Validação de dados de entrada.
-Análise de Consumo Energético:
-
+Análise de Consumo Energético
 Cálculo do consumo total dos produtos.
 Identificação de produtos com alto consumo.
-Insights para Economia de Energia:
-
+Insights para Economia de Energia
 Dicas e sugestões para reduzir o consumo energético.
 Recomendações personalizadas baseadas nos produtos cadastrados.
 Configurações Iniciais
@@ -186,3 +182,6 @@ MySQL
 Bootstrap 5
 Contribuições
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e pull requests.
+
+
+

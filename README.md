@@ -26,16 +26,20 @@ Gerenciar usuários com autenticação e validação.
 Analisar o consumo energético dos produtos cadastrados.
 Fornecer insights para economia de energia, utilizando sugestões geradas pelo ChatGPT.
 Funcionalidades
-Cadastro de Produtos
+Cadastro de Produtos:
+
 Nome do produto.
 Consumo energético (em kWh).
-Gerenciamento de Usuários
+Gerenciamento de Usuários:
+
 Cadastro de novos usuários.
 Validação de dados de entrada.
-Análise de Consumo Energético
+Análise de Consumo Energético:
+
 Cálculo do consumo total dos produtos.
 Identificação de produtos com alto consumo.
-Insights para Economia de Energia
+Insights para Economia de Energia:
+
 Dicas e sugestões para reduzir o consumo energético.
 Recomendações personalizadas baseadas nos produtos cadastrados.
 Configurações Iniciais
@@ -56,8 +60,7 @@ IDE de sua preferência (IntelliJ IDEA, Eclipse, etc.).
 Passos para Execução
 Clonar o Repositório:
 
-bash
-Copiar código
+
 git clone https://github.com/seu-usuario/seu-repositorio.git
 Importar o Projeto na IDE:
 
@@ -68,8 +71,7 @@ Criar um banco de dados no MySQL (por exemplo, gestao_energia).
 
 Atualizar o arquivo src/main/resources/application.properties com as credenciais do seu banco de dados:
 
-properties
-Copiar código
+
 spring.datasource.url=jdbc:mysql://localhost:3306/gestao_energia
 spring.datasource.username=seu_usuario
 spring.datasource.password=sua_senha
@@ -77,8 +79,6 @@ Executar o Projeto:
 
 Pela linha de comando:
 
-bash
-Copiar código
 mvn spring-boot:run
 Ou pela IDE, executando a classe DemoApplication.
 
@@ -90,8 +90,6 @@ Classes Principais
 Classe Produto
 Representa os produtos com informações de consumo energético.
 
-java
-Copiar código
 @Entity
 @Table(name = "produtos")
 public class Produto {
@@ -112,8 +110,6 @@ public class Produto {
 Classe Usuario
 Gerencia os usuários da aplicação.
 
-java
-Copiar código
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
@@ -139,8 +135,7 @@ public class Usuario {
 Classe ConsumoEnergetico
 Realiza cálculos e análises sobre o consumo energético.
 
-java
-Copiar código
+
 public class ConsumoEnergetico {
 
     public Double calcularConsumoTotal(List<Produto> produtos) {
@@ -182,6 +177,4 @@ MySQL
 Bootstrap 5
 Contribuições
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e pull requests.
-
-
 

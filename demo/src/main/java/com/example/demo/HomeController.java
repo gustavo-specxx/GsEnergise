@@ -11,6 +11,11 @@ public class HomeController {
         return "home";
     }
 
+    @GetMapping("/produtos")
+    public String produtosHome() {
+        return "produtos-listar"; // Página principal de produtos (separada da listagem completa)
+    }
+
     @GetMapping("/consumo-energetico")
     public String consumoEnergetico() {
         return "consumo-energetico";

@@ -1,20 +1,45 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>GsEnergize - Home</title>
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Ícones do Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- Estilos Personalizados -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .navbar-brand {
+            font-weight: bold;
+        }
+        .card:hover {
+            transform: scale(1.02);
+            transition: 0.3s;
+        }
+        .bg-gradient {
+            background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-gradient">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">GsEnergise</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link active" th:href="@{/home}">Home</a>
                 </li>
@@ -28,22 +53,163 @@
                     <a class="nav-link" th:href="@{/usuarios}">Gerenciar Usuários</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/produtos}">Gerenciar Produtos</a>
+                    <a class="nav-link" th:href="@{/produtos/listar}">Gerenciar Produtos</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+
+<!-- Carrossel -->
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="https://via.placeholder.com/1920x500?text=GsEnergise+-+Soluções+Energéticas" class="d-block w-100" alt="Banner 1">
+        </div>
+        <div class="carousel-item">
+            <img src="https://via.placeholder.com/1920x500?text=Otimize+Seu+Consumo+de+Energia" class="d-block w-100" alt="Banner 2">
+        </div>
+        <div class="carousel-item">
+            <img src="https://via.placeholder.com/1920x500?text=Insights+Inteligentes+com+ChatGPT" class="d-block w-100" alt="Banner 3">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
+
+<!-- Seção de Recursos -->
 <div class="container mt-5">
-    <h1>Bem-vindo ao GsEnergise</h1>
-    <p>Escolha uma das opções abaixo para começar:</p>
-    <div class="list-group">
-        <a class="list-group-item list-group-item-action" th:href="@{/consumo}">Consumo Energético</a>
-        <a class="list-group-item list-group-item-action" th:href="@{/insights}">Insights do ChatGPT</a>
-        <a class="list-group-item list-group-item-action" th:href="@{/usuarios}">Gerenciar Usuários</a>
-        <a class="list-group-item list-group-item-action" th:href="@{/produtos/listar}">Gerenciar Produtos</a>
+    <h2 class="text-center mb-5">Nossos Serviços</h2>
+    <div class="row">
+        <!-- Consumo Energético -->
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card h-100 text-center">
+                <div class="card-body">
+                    <i class="bi bi-speedometer2 display-4 text-primary mb-3"></i>
+                    <h5 class="card-title">Consumo Energético</h5>
+                    <p class="card-text">Monitore e analise o consumo energético de forma eficiente.</p>
+                    <a class="btn btn-outline-primary" th:href="@{/consumo}">Acessar</a>
+                </div>
+            </div>
+        </div>
+        <!-- Insights do ChatGPT -->
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card h-100 text-center">
+                <div class="card-body">
+                    <i class="bi bi-chat-dots display-4 text-primary mb-3"></i>
+                    <h5 class="card-title">Insights do ChatGPT</h5>
+                    <p class="card-text">Obtenha recomendações inteligentes para economizar energia.</p>
+                    <a class="btn btn-outline-primary" th:href="@{/insights}">Acessar</a>
+                </div>
+            </div>
+        </div>
+        <!-- Gerenciar Usuários -->
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card h-100 text-center">
+                <div class="card-body">
+                    <i class="bi bi-people display-4 text-primary mb-3"></i>
+                    <h5 class="card-title">Gerenciar Usuários</h5>
+                    <p class="card-text">Controle o acesso e as permissões dos usuários do sistema.</p>
+                    <a class="btn btn-outline-primary" th:href="@{/usuarios}">Acessar</a>
+                </div>
+            </div>
+        </div>
+        <!-- Gerenciar Produtos -->
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card h-100 text-center">
+                <div class="card-body">
+                    <i class="bi bi-box-seam display-4 text-primary mb-3"></i>
+                    <h5 class="card-title">Gerenciar Produtos</h5>
+                    <p class="card-text">Adicione, remova e atualize informações de produtos.</p>
+                    <a class="btn btn-outline-primary" th:href="@{/produtos/listar}">Acessar</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<!-- Seção de Depoimentos -->
+<div class="bg-light py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">O que nossos clientes dizem</h2>
+        <div class="row">
+            <!-- Depoimento 1 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <p class="card-text">"O GsEnergise revolucionou a forma como gerenciamos nosso consumo de energia."</p>
+                        <h5 class="card-title">- João Silva</h5>
+                    </div>
+                </div>
+            </div>
+            <!-- Depoimento 2 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <p class="card-text">"As insights fornecidas nos ajudaram a economizar muito."</p>
+                        <h5 class="card-title">- Maria Fernandes</h5>
+                    </div>
+                </div>
+            </div>
+            <!-- Depoimento 3 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <p class="card-text">"Excelente plataforma para gestão energética."</p>
+                        <h5 class="card-title">- Carlos Eduardo</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Seção de Contato -->
+<div class="container py-5">
+    <h2 class="text-center mb-5">Entre em Contato</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form>
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="nome" placeholder="Seu nome">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Endereço de Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="nome@exemplo.com">
+                </div>
+                <div class="mb-3">
+                    <label for="mensagem" class="form-label">Mensagem</label>
+                    <textarea class="form-control" id="mensagem" rows="5" placeholder="Escreva sua mensagem aqui..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Rodapé -->
+<footer class="bg-gradient text-white text-center py-3">
+    <div class="container">
+        <p>&copy; 2023 GsEnergise. Todos os direitos reservados.</p>
+        <p>
+            <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-white me-3"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
+        </p>
+    </div>
+</footer>
+
+<!-- Bootstrap JS e dependências -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

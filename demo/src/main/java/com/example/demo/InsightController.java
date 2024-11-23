@@ -20,9 +20,19 @@ public class InsightController {
 
     @PostMapping("/insights")
     public String generateInsight(@RequestParam("mensagem") String mensagem, Model model) {
-        String insight = chatGPTService.gerarInsight(mensagem);
-        model.addAttribute("mensagem", mensagem);
-        model.addAttribute("insight", insight);
+        if (mensagem == null || mensagem.trim().isEmpty()) {
+            model.addAttribute("insight", "Por favor, insira uma mensagem válida.");
+            return "insights";
+        }
+
+        try {
+            String insight = chatGPTService.gerarInsight(mensagem.trim());
+            model.addAttribute("mensagem", mensagem);
+            model.addAttribute("insight", insight);
+        } catch (Exception e) {
+            model.addAttribute("insight", "Erro ao gerar o insight: " + e.getMessage());
+        }
+
         return "insights";
     }
 }

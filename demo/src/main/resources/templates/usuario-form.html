@@ -2,42 +2,179 @@
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Cadastrar Usuário</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <title>GsEnergise - Cadastrar Usuário</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Ícones do Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- Estilos Personalizados -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .navbar-brand {
+            font-weight: bold;
+        }
+        .bg-gradient {
+            background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);
+        }
+        .card:hover {
+            transform: scale(1.02);
+            transition: 0.3s;
+        }
+        footer {
+            /* Removi position: fixed e bottom: 0 para evitar sobreposição do conteúdo */
+            /* position: fixed; */
+            /* bottom: 0; */
+            width: 100%;
+        }
+        .page-header {
+            background-image: url('https://via.placeholder.com/1920x300?text=Cadastrar+Usuário');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            position: relative;
+            color: #fff;
+        }
+        .page-header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .page-header h1 {
+            position: relative;
+            z-index: 1;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        /* Estilos adicionais para o formulário */
+        .form-control {
+            border-radius: 0;
+        }
+        .btn {
+            border-radius: 0;
+        }
+    </style>
 </head>
 <body>
-<div class="container mt-5">
-    <h1 class="mb-4">Cadastrar Usuário</h1>
-
-    <form th:action="@{/usuarios/salvar}" th:object="${usuario}" method="post" class="mt-4">
-
-        <!-- Exibição de mensagens de erro -->
-        <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}" role="alert">
-            <ul>
-                <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-gradient">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/home}">GsEnergise</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/home}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/consumo}">Consumo Energético</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/insights}">Insights do ChatGPT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" th:href="@{/usuarios/listar}">Gerenciar Usuários</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/produtos/listar}">Gerenciar Produtos</a>
+                </li>
             </ul>
         </div>
+    </div>
+</nav>
 
-        <div class="mb-3">
-            <label for="nome" class="form-label">Nome</label>
-            <input type="text" id="nome" class="form-control" th:field="*{nome}" required>
-            <div class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
-        </div>
-        <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" id="email" class="form-control" th:field="*{email}" required>
-            <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
-        </div>
-        <div class="mb-3">
-            <label for="senha" class="form-label">Senha</label>
-            <input type="password" id="senha" class="form-control" th:field="*{senha}" required>
-            <div class="text-danger" th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}"></div>
-        </div>
-        <button type="submit" class="btn btn-success">Salvar</button>
-        <a class="btn btn-secondary" th:href="@{/usuarios}" role="button">Cancelar</a>
-    </form>
+<!-- Cabeçalho da Página -->
+<div class="page-header text-center text-white">
+    <div class="container">
+        <h1 class="display-4">Cadastrar Usuário</h1>
+        <p class="lead">Adicione novos usuários ao sistema.</p>
+    </div>
 </div>
 
+<!-- Conteúdo Principal -->
+<div class="container my-5">
+    <!-- Botão para Voltar para Home -->
+    <div class="d-flex justify-content-between mb-3">
+        <a th:href="@{/home}" class="btn btn-secondary"><i class="bi bi-house"></i> Voltar para Home</a>
+    </div>
+    <h2 class="mb-4 text-center">Informações do Usuário</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form th:action="@{/usuarios/salvar}" th:object="${usuario}" method="post">
+                <!-- Exibição de Mensagens de Erro -->
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}" role="alert">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+                    </ul>
+                </div>
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" id="nome" class="form-control" th:field="*{nome}" placeholder="Digite o nome completo" required>
+                    <div class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">E-mail</label>
+                    <input type="email" id="email" class="form-control" th:field="*{email}" placeholder="nome@exemplo.com" required>
+                    <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="senha" class="form-label">Senha</label>
+                    <input type="password" id="senha" class="form-control" th:field="*{senha}" placeholder="Digite uma senha" required>
+                    <div class="text-danger" th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}"></div>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-success me-2"><i class="bi bi-check-circle"></i> Salvar</button>
+                    <a class="btn btn-secondary" th:href="@{/usuarios/listar}" role="button"><i class="bi bi-x-circle"></i> Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Seção de Contato -->
+<div class="container py-5">
+    <h2 class="text-center mb-5">Precisa de Ajuda?</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form>
+                <div class="mb-3">
+                    <label for="nomeContato" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="nomeContato" placeholder="Seu nome">
+                </div>
+                <div class="mb-3">
+                    <label for="emailContato" class="form-label">Endereço de E-mail</label>
+                    <input type="email" class="form-control" id="emailContato" placeholder="nome@exemplo.com">
+                </div>
+                <div class="mb-3">
+                    <label for="mensagemContato" class="form-label">Mensagem</label>
+                    <textarea class="form-control" id="mensagemContato" rows="5" placeholder="Escreva sua mensagem aqui..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Rodapé -->
+<footer class="bg-gradient text-white text-center py-3">
+    <div class="container">
+        <p>&copy; 2023 GsEnergise. Todos os direitos reservados.</p>
+        <p>
+            <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-white me-3"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
+        </p>
+    </div>
+</footer>
+
+<!-- Bootstrap JS e dependências -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

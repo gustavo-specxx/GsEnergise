@@ -36,7 +36,7 @@ public class ChatGPTService {
      */
     public String gerarInsight(String mensagem) {
         if (apiKey == null || apiKey.isEmpty()) {
-            return "A chave da API do OpenAI não está configurada.";
+            return "Erro: A chave da API do OpenAI não está configurada.";
         }
 
         System.out.println("API Key usada: " + apiKey);
@@ -79,9 +79,9 @@ public class ChatGPTService {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return "Erro ao se conectar com a API: " + e.getMessage();
+            return "Erro ao se conectar com a API do OpenAI: " + e.getMessage();
         }
 
-        return "Não foi possível gerar o insight no momento.";
+        return "Não foi possível gerar o insight no momento. Tente novamente mais tarde.";
     }
 }
